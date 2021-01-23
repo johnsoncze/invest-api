@@ -19,7 +19,7 @@ const orders = [
 	}
 })
 console.log(orders)
-Order = require('./orderModel');
+Order = require('../models/order-model');
 Order.insertMany(orders, (err) => {
 	console.log(err)
 	process.exit()
