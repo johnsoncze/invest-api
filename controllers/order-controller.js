@@ -1,3 +1,5 @@
+const config = require('../config')
+
 Order = require('../models/order-model');
 
 exports.index = function (req, res) {
@@ -79,3 +81,22 @@ res.json({
         });
     });
 };
+
+exports.getStats = async function (req, res) {
+	try {
+		const stats = await Order.getStats()
+		res.json({
+			status: "success",
+			message: "Orders stats retrieved successfully",
+			data: {
+				...stats,
+				ownInvestment: config.ownInvestment,
+			}
+		});
+	} catch (err) {
+		res.json({
+			status: "error",
+			message: err,
+		});
+	}
+}

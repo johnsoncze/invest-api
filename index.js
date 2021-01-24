@@ -1,17 +1,17 @@
 // Import express
-require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 const apiRoutes = require("./routes/api-routes");
+const config = require('./config')
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.DB_MONGO, { useNewUrlParser: true});
+mongoose.connect(config.mongo.conn, { useNewUrlParser: true});
 const db = mongoose.connection;
 
 if(!db)
@@ -19,7 +19,7 @@ if(!db)
 else
     console.log("Db connected successfully")
 
-const port = process.env.PORT || 8080;
+const port = config.port || 8080;
 
 app.get('/', (req, res) => res.send('Hello World with Express'));
 app.use('/api', apiRoutes);

@@ -1,6 +1,6 @@
-require('dotenv').config()
+const config = require('../config')
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DB_MONGO, { useNewUrlParser: true});
+mongoose.connect(config.mongo.conn, { useNewUrlParser: true});
 const db = mongoose.connection;
 if(!db)
 	console.log("Error connecting db")
@@ -15,7 +15,8 @@ const orders = [
 		total: o[1],
 		amount: o[2],
 		price: o[3],
-		currency: 'BTC'
+		currency: 'BTC',
+		type: 'BUY'
 	}
 })
 console.log(orders)
