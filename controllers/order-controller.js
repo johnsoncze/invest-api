@@ -24,8 +24,8 @@ exports.new = function (req, res) {
     order.amount = req.body.amount;
     order.date = req.body.date;
     order.currency = req.body.currency;
-    order.type = req.body.type;
-    order.price = order.total / order.amount;
+    order.type = req.body.type || 'BUY';
+		order.price = order.total / order.amount;
 
 		order.save(function (err) {
         if (err)
